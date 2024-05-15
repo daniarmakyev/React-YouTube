@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: rgb(15,15,15);
+    color: #f1f1f1;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-rows: 68px 1fr;
+    grid-template-columns:255px  1fr; 
+    grid-template-areas:
+      "header header"
+      "sidebar mainContent";
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  
+  .header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sidebar {
+    grid-area: sidebar;
+    word-break: break-all;
+  }
+  
+  .mainContent {
+    grid-area: mainContent;
+  }
