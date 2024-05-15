@@ -1,4 +1,95 @@
 .header {
     padding-left: 25px;
-    padding-top: 20px;
+    padding-top: 10px;
+}
+
+.searchPAPA {
+    width: 570px;
+    max-height: 40px;
+    display: flex;
+    position: relative;
+}
+
+.search {
+    border: 1px solid #303030;
+    background: #121212;
+    border-radius: 20px;
+    height: 40px;
+    width: 90%;
+    border-end-end-radius: 0;
+    border-top-right-radius: 0;
+    padding-left: 20px;
+}
+
+
+.search:focus-visible {
+    outline: none;
+    border-color: #1C62B9;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+}
+
+
+.leftHeader {
+    display: flex;
+    gap: 15px;
+}
+.leftHeader img {
+    max-height: 24px;
+
+}
+
+.searchLoop {
+    background-color: #222222;
+    border: 1px solid #303030;
+    border-left: none;
+    height: 40px;
+    position: relative;
+    width: 62px;
+    border-end-end-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.searchLoop svg {
+    position: absolute;
+    top: 8px;
+    left: 18px;
+}
+
+.focusLoopPAPA {
+    border: 1px solid #1C62B9;
+    background: #121212;
+    width: 40px;
+    height: 40px;
+    border-right: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: none;
+    position: absolute;
+    left: -40px;
+    top: 0px;
+}
+
+
+.focusLoop {
+    position: absolute;
+    top: 10px;
+    left: 18px;
+}
+
+.keyboard {
+    position: absolute;
+    max-width: 24px;
+    right: 75px;
+    top: 7px;
+    transition: 0.2s;
+}
+
+.keyboard:hover {
+    filter: drop-shadow(0px 0px 0px rgb(255, 255, 255)); /* Задает белую тень SVG */
+    cursor: pointer;
+}
+
+.addVideo {
+    margin-right: 20px;
 }
