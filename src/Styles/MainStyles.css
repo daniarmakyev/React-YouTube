@@ -18,8 +18,8 @@ body, html {
     grid-template-areas:
       "header header"
       "sidebar mainContent";
-      margin-left: auto;
-      margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   
@@ -27,13 +27,14 @@ body, html {
     grid-area: header;
     display: flex;
     justify-content: space-between;
+    margin-left: 20%;
   }
   
   .sidebar {
     grid-area: sidebar;
     word-break: break-all;
     position: fixed;
-    top: 90px;
+    top: 20px;
     max-width: 255px;
     left: 20px;
   }

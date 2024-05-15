@@ -6,7 +6,7 @@ import SideBar from "../Widget/SideBar/SideBar";
 
 const   MainLayout = () => {
   return (
-    <div className="container max-w-max">
+    <div className="container">
         <Navbar/>
         <SideBar/>
         <Outlet/>
