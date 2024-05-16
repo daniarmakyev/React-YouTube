@@ -1,0 +1,25 @@
+.authForm {
+    max-width: 300px;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    display: grid;
+    margin-left: 33%;
+    align-items: center;
+}
+
+.authForm h2 {
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.authButton {
+    border: 1px solid #fff;
+    padding: 7px;
+    max-width: 180px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}

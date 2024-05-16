@@ -1,0 +1,25 @@
+.profileTop {
+    padding-bottom: 60px;
+    border-bottom: 1px solid #464646;
+    padding-top: 30px;
+    padding-left: 150px;
+}
+
+.avatar {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+}
+
+.buttons button {
+    background-color: #272727;
+    margin-right: 8px;
+    border-radius: 18px;
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.buttons button:hover {
+    background-color: #464646;
+}
