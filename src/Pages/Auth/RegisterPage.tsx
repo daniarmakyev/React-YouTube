@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { RegisterValues, useAppDispatch } from '../../helpers/types'
+import { RegisterValues, useAppDispatch, useAppSelector } from '../../helpers/types'
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input';
 import styles from "./Auth.module.css"
@@ -12,7 +12,7 @@ const RegisterPage = () => {
         password:'',
         password_confirm:''
     })
-
+    const { error } = useAppSelector((state) => state.users);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -43,7 +43,6 @@ const RegisterPage = () => {
           alert("Passowrds do not match!");
           return;
         }
-    
         dispatch(registerUser({ data: user, navigate }));
       }
   return (
@@ -58,6 +57,7 @@ const RegisterPage = () => {
           placeholder={item}
         />
       ))}
+      {error && <h1>ОШибка</h1>}
       <button className={styles.authButton}>Регистрация</button>
     </form>
   )

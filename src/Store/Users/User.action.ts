@@ -1,25 +1,42 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { $axios } from "../../helpers/axios";
-import { setError } from "./User.slice";
+import { setError, usersSlice } from "./User.slice";
 import { LoginValues, ProfileType, RegisterValues } from "../../helpers/types";
+import axios from "axios";
 
 export const registerUser = createAsyncThunk(
   "users/registerUser",
   async (
     {data,navigate,}: { data: RegisterValues; navigate: (path: string) => void },{ dispatch } ) => {
+      
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
     formData.append("password_confirm", data.password_confirm);
-    try {
-      await $axios.post("/register/", formData);
-      navigate("/login");
-      dispatch(setError(null));
-    } catch (error: any) {
-      console.log(Object.values(error.response.data).flat(2)[0]);
-      dispatch(setError(Object.values(error.response.data).flat(2)[0]));
+
+      try {
+        const res:any = await axios.post("http://34.125.223.99/api/v1/accounts/register/", formData);
+        // const numberError = res.response.status
+        // console.log(res);
+        console.log(navigate);
+        navigate('/')
+      } catch (error) {
+        console.log(error);
+        
+        // if (res) {
+        //   dispatch(usersSlice.actions.setError(numberError));
+        //   console.log(res);
+          
+        // } else{
+        //   navigate('/')
+        //   setError(null)
+        //   console.log(res);
+          
+        // }
+      }
+
     }
-  }
+  
 );
 
 export const loginUser = createAsyncThunk(
@@ -32,17 +49,22 @@ export const loginUser = createAsyncThunk(
     formData.append("email", data.email);
     formData.append("password", data.password);
     try {
-      const { data } = await $axios.post("/login/", formData);
-      localStorage.setItem("tokens", JSON.stringify(data));
+      const response = await $axios.post("/login/", formData);
+      localStorage.setItem("tokens", JSON.stringify(response.data));
       dispatch(getCurrentUser());
       navigate("/");
       dispatch(setError(null));
     } catch (error: any) {
-      console.log(Object.values(error.response.data).flat(2)[0]);
-      dispatch(setError(Object.values(error.response.data).flat(2)[0]));
+      console.error("Error:", error); 
+      if (error.response?.status === 401) {
+        dispatch(setError("Неправильный email или пароль"));
+      } else {
+        dispatch(setError("Неправильный email или пароль"));
+      }
     }
   }
 );
+
 
 export const getCurrentUser = createAsyncThunk(
   "users/getCurrentUser",

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StatesType } from "../../helpers/types";
-import { getCurrentUser } from "./User.action";
+import { getCurrentUser, loginUser } from "./User.action";
+import { log } from "console";
 
 const INIT_STATE: StatesType = {
   error: null,
@@ -28,8 +29,22 @@ export const usersSlice = createSlice({
       })
       .addCase(getCurrentUser.pending, (state) => {
         state.loading = true;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        console.log(state);
+        
+        state.error = action.error.message || "Произошла ошибка при входе";
+        state.loading = false;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loginUser.fulfilled, (state) => {
+        state.loading = false;
       });
   },
 });
 
 export const { setError, logout } = usersSlice.actions;
+
+export default usersSlice.reducer;

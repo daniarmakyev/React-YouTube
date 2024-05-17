@@ -46,6 +46,8 @@ $axios.interceptors.response.use(
           HandleLogout();
         }
       }
+    }else if (error.response.status === 400){
+        return error
     }
   }
 );

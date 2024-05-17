@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../helpers/types";
 import { loginUser } from "../../Store/Users/User.action";
-import styles from "./Auth.module.css"
+import styles from "./Auth.module.css";
 import Input from "../../components/Input/Input";
 
 const LoginPage = () => {
@@ -12,7 +12,6 @@ const LoginPage = () => {
   });
 
   const { error } = useAppSelector((state) => state.users);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -27,11 +26,9 @@ const LoginPage = () => {
   }
 
   return (
-
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h2>Login form</h2>
-        {error && <h2 style={{ color: "red" }}>{error}!!!</h2>}
+        <h2>Вход</h2>
         {Object.keys(user).map((item) => (
           <Input
             onChange={handleChange}
@@ -41,12 +38,12 @@ const LoginPage = () => {
             placeholder={item}
           />
         ))}
-        <button className={styles.button}>Sign in</button>
+        {error && <h2 style={{ color: "red" }}>{error}</h2>}
+        <button className={styles.button}>Войти</button>
       </form>
     </div>
-
   );
-
 };
 
 export default LoginPage;
+  
