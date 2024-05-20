@@ -31,14 +31,6 @@
 }
 
 
-.leftHeader {
-    display: flex;
-    gap: 15px;
-}
-.leftHeader img {
-    max-height: 24px;
-
-}
 
 .searchLoop {
     background-color: #222222;

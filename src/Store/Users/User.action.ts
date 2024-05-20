@@ -15,24 +15,11 @@ export const registerUser = createAsyncThunk(
     formData.append("password_confirm", data.password_confirm);
 
       try {
-        const res:any = await axios.post("http://34.125.223.99/api/v1/accounts/register/", formData);
-        // const numberError = res.response.status
-        // console.log(res);
+        const res:any = await axios.post("http://34.16.210.117/api/v1/accounts/register/", formData);
         console.log(navigate);
         navigate('/')
       } catch (error) {
         console.log(error);
-        
-        // if (res) {
-        //   dispatch(usersSlice.actions.setError(numberError));
-        //   console.log(res);
-          
-        // } else{
-        //   navigate('/')
-        //   setError(null)
-        //   console.log(res);
-          
-        // }
       }
 
     }
@@ -49,7 +36,7 @@ export const loginUser = createAsyncThunk(
     formData.append("email", data.email);
     formData.append("password", data.password);
     try {
-      const response = await $axios.post("/login/", formData);
+      const response = await $axios.post("/accounts/login/", formData);
       localStorage.setItem("tokens", JSON.stringify(response.data));
       dispatch(getCurrentUser());
       navigate("/");
