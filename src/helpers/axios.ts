@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "./types";
 import { logout } from "../Store/Users/User.slice";
+import { useEffect } from "react";
 
 export const $axios = axios.create();
 

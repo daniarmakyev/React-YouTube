@@ -1,0 +1,23 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.info {
+    display: flex;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.preview {
+    width: 320px;
+    height: 170px;
+    border-radius: 10px;
+}

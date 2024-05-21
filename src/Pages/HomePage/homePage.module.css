@@ -1,0 +1,7 @@
+.mainContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-left: auto !important;
+    margin-right: auto;
+}

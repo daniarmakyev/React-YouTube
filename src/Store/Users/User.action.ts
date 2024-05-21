@@ -38,7 +38,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await $axios.post("/accounts/login/", formData);
       localStorage.setItem("tokens", JSON.stringify(response.data));
-      dispatch(getCurrentUser());
+      dispatch(getCurrentUser(data.email));
       navigate("/");
       dispatch(setError(null));
     } catch (error: any) {
@@ -55,12 +55,25 @@ export const loginUser = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
   "users/getCurrentUser",
-  async () => {
+  async (email: string) => {
     try {
-      const { data } = await $axios.get<ProfileType>("/account/profile/");
-      return data;
+      const { data } = await $axios.get<ProfileType>(`/accounts/${email}`);
+      console.log(data.id);
+      localStorage.setItem('currentUser', data.id+'')
     } catch (error) {
       console.log(error);
-    }
   }
+}
+);
+
+export const getOneUser = createAsyncThunk(
+  "users/getCurrentUser",
+  async (id: string) => {
+    try {
+      const { data } = await $axios.get<ProfileType>(`/accounts/${id}/`);
+      return data
+    } catch (error) {
+      console.log(error);
+  }
+}
 );

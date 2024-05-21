@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StatesType } from "../../helpers/types";
-import { getCurrentUser, loginUser } from "./User.action";
+import { getCurrentUser, getOneUser, loginUser } from "./User.action";
 import { log } from "console";
 
 const INIT_STATE: StatesType = {
@@ -23,25 +23,18 @@ export const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload!;
-        state.loading = false;
-      })
-      .addCase(getCurrentUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        console.log(state);
-        
-        state.error = action.error.message || "Произошла ошибка при входе";
-        state.loading = false;
-      })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(loginUser.fulfilled, (state) => {
         state.loading = false;
-      });
+      }).addCase(getOneUser.fulfilled, (state, action) => {
+        state.user = action.payload!;
+        state.loading = false;
+      })
+      .addCase(getOneUser.pending, (state) => {
+        state.loading = true;
+      })
   },
 });
 

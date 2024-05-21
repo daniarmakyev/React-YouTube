@@ -25,7 +25,6 @@ body, html {
     grid-area: header;
     display: flex;
     justify-content: space-between;
-    margin-left: 20%;
   }
   
   .sidebar {
@@ -40,4 +39,5 @@ body, html {
   .mainContent {
     grid-area: mainContent;
     margin-left: 20px;
+    max-width: 1720px;
   }

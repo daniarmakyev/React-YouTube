@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../helpers/types";
-import { loginUser } from "../../Store/Users/User.action";
+import { getCurrentUser, loginUser } from "../../Store/Users/User.action";
 import styles from "./Auth.module.css";
 import Input from "../../components/Input/Input";
 
@@ -22,6 +22,7 @@ const LoginPage = () => {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
     dispatch(loginUser({ data: user, navigate }));
   }
 
