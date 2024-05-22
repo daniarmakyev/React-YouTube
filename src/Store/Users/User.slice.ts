@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StatesType } from "../../helpers/types";
-import { getCurrentUser, getOneUser, loginUser } from "./User.action";
-import { log } from "console";
+import { getCurrentUser, getOneUser, loginUser, registerUser } from "./User.action";
+import { useNavigate } from "react-router-dom";
 
 const INIT_STATE: StatesType = {
   error: null,
@@ -18,6 +18,7 @@ export const usersSlice = createSlice({
     },
     logout: (state) => {
       localStorage.removeItem("tokens");
+      localStorage.removeItem("currentUser");
       state.user = null;
     },
   },
@@ -28,13 +29,25 @@ export const usersSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state) => {
         state.loading = false;
-      }).addCase(getOneUser.fulfilled, (state, action) => {
+      })
+      .addCase(getOneUser.fulfilled, (state, action) => {
         state.user = action.payload!;
         state.loading = false;
       })
       .addCase(getOneUser.pending, (state) => {
         state.loading = true;
       })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(registerUser.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 

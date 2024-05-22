@@ -23,3 +23,14 @@
 .buttons button:hover {
     background-color: #464646;
 }
+
+.editFrom {
+        max-width: 300px;
+        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        display: grid;
+        margin-left: 33%;
+        align-items: center;
+}

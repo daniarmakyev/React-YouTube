@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../helpers/types";
 import { getCurrentUser, loginUser } from "../../Store/Users/User.action";
 import styles from "./Auth.module.css";
@@ -22,14 +22,13 @@ const LoginPage = () => {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
     dispatch(loginUser({ data: user, navigate }));
   }
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h2>Вход</h2>
+    <div className={`${styles.container} mainContent`}>
+      <form onSubmit={handleSubmit} className={styles.authForm}>
+        <h2 className="text-xl">Вход</h2>
         {Object.keys(user).map((item) => (
           <Input
             onChange={handleChange}
@@ -39,12 +38,12 @@ const LoginPage = () => {
             placeholder={item}
           />
         ))}
-        {error && <h2 style={{ color: "red" }}>{error}</h2>}
+        {error && <h2 className="text-red-500">{error}</h2>}
         <button className={styles.button}>Войти</button>
+        <Link className={styles.linkRegister} to={'/register'}>У вас нет аккаунта? Создайте его прямо сейчас! </Link>
       </form>
     </div>
   );
 };
 
 export default LoginPage;
-  

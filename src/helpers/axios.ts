@@ -7,8 +7,7 @@ import { useEffect } from "react";
 export const $axios = axios.create();
 
 function HandleLogout() {
-  console.log("test");
-
+  console.log("Logging out...");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   dispatch(logout());
@@ -24,13 +23,11 @@ $axios.interceptors.request.use(async (config) => {
   return config;
 });
 
-
-
 $axios.interceptors.response.use(
   (res) => res,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 403 && !originalRequest._retry) {
+    if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
       const tokens = JSON.parse(localStorage.getItem("tokens") as string);
       if (tokens) {
@@ -43,14 +40,16 @@ $axios.interceptors.response.use(
             "tokens",
             JSON.stringify({ ...tokens, access: data.access })
           );
-          return $axios.request(originalRequest);
+          originalRequest.headers['Authorization'] = `Bearer ${data.access}`;
+          return $axios(originalRequest);
         } catch (error) {
-          console.log("hello", error);
+          console.log("Refresh token error:", error);
           HandleLogout();
         }
       }
-    }else if (error.response.status === 400){
-        return error
+    } else if (error.response?.status === 400) {
+      return Promise.reject(error);
     }
+    return Promise.reject(error);
   }
 );
