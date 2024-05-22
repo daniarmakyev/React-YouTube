@@ -7,8 +7,10 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 export type StatesType = {
   error: null | string;
   loading: boolean;
-  user: null | ProfileType;
+  user?: null | ProfileType;
+  videos?: VideoType[];
 };
+
 export type RegisterValues = {
   email: string;
   password: string;
@@ -30,4 +32,45 @@ export interface ProfileType {
 }
 
 
+
+export interface VideoType {
+  id?: any;
+  likes_count: string;
+  title: string;
+  description: string;
+  file: string | File;
+  thumbnail: string | File;
+  uploaded_at: string | Date;
+  owner: number;
+}
+
+
+// {
+//   id	integer
+//   title: ID
+//   readOnly: true
+//   likes_count	string
+//   title: Likes count
+//   readOnly: true
+//   title*	string
+//   title: Title
+//   maxLength: 255
+//   minLength: 1
+//   description*	string
+//   title: Description
+//   minLength: 1
+//   file	string($uri)
+//   title: File
+//   readOnly: true
+//   thumbnail	string($uri)
+//   title: Thumbnail
+//   readOnly: true
+//   x-nullable: true
+//   uploaded_at	string($date-time)
+//   title: Uploaded at
+//   readOnly: true
+//   owner*	integer
+//   title: Owner
+   
+//   }
 

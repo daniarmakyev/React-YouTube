@@ -6,6 +6,7 @@ import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import RegisterPage from "../Pages/Auth/RegisterPage";
 import LoginPage from "../Pages/Auth/LoginPage";
 import ProfileEditPage from "../Pages/ProfilePage/ProfileEditPage";
+import AddVideoPage from "../Pages/AddVideo/AddVideoPage";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
         { path: "/register", element: <RegisterPage /> },
         { path: "/login", element: <LoginPage/> },
         { path: "/editProfile", element: <ProfileEditPage/> },
+        { path: "/addVideo", element: <AddVideoPage/> },
       ],
     },
   ]);

@@ -48,6 +48,7 @@ const ProfileEditPage = () => {
         formData.append("profile_picture", users.profile_picture);
       }
       dispatch(editOneUser({ id: Number(id), newData: formData }));
+      navigate('/')
     }
   }
 
