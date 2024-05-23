@@ -1,0 +1,22 @@
+.p2Err {
+  color: red;
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 200px;
+  border-block: 1px solid #3f3f3f;
+  font-size: 200px;
+  cursor: pointer;
+}
+
+.pErr {
+  color: red;
+  margin-left: 30%;
+  padding-top: 4px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.btnErr {
+  margin-left: 48%;
+  font-size: 20px;
+}
