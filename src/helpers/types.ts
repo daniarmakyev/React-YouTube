@@ -9,6 +9,7 @@ export type StatesType = {
   loading: boolean;
   user?: null | ProfileType;
   videos?: VideoType[];
+  video?:null | VideoType;
 };
 
 export type RegisterValues = {
@@ -34,14 +35,15 @@ export interface ProfileType {
 
 
 export interface VideoType {
+  results?: any;
   id?: any;
-  likes_count: string;
-  title: string;
-  description: string;
-  file: string | File;
-  thumbnail: string | File;
-  uploaded_at: string | Date;
-  owner: number;
+  likes_count?: string;
+  title?: string;
+  description?: string;
+  file?: string ;
+  thumbnail?: string | File;
+  uploaded_at?: string | Date;
+  owner?: number;
 }
 
 

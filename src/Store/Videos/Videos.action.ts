@@ -8,6 +8,29 @@ export const getVideos = createAsyncThunk(
     async () => {
       try {
         const { data } = await $axios.get<VideoType>(`/videos/`);
+        return data.results
+      } catch (error) {
+        console.log(error);
+    }
+  }
+  );
+
+  export const postVideos = createAsyncThunk(
+    "videos/postVideos",
+    async ({ newData }: { newData: FormData }) => {
+      try {
+        await $axios.post<VideoType>(`/videos/`, newData);
+      } catch (error) {
+        console.log(error);
+    }
+  }
+  );
+  export const getVideoById = createAsyncThunk(
+    "users/getCurrentUser",
+    async (id: string) => {
+      try {
+        const { data } = await $axios.get<VideoType>(`/videos/${id}/`);
+        console.log(data);
         return data
       } catch (error) {
         console.log(error);

@@ -7,6 +7,7 @@ import RegisterPage from "../Pages/Auth/RegisterPage";
 import LoginPage from "../Pages/Auth/LoginPage";
 import ProfileEditPage from "../Pages/ProfilePage/ProfileEditPage";
 import AddVideoPage from "../Pages/AddVideo/AddVideoPage";
+import DetailView from "../Pages/DetailView/DetailView";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
         { path: "/login", element: <LoginPage/> },
         { path: "/editProfile", element: <ProfileEditPage/> },
         { path: "/addVideo", element: <AddVideoPage/> },
+        { path: "/detailView/:id", element: <DetailView/> },
       ],
     },
   ]);
