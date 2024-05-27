@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StatesType } from "../../helpers/types";
 import { getCurrentUser, getOneUser, loginUser, registerUser } from "./User.action";
-import { useNavigate } from "react-router-dom";
 
 const INIT_STATE: StatesType = {
   error: null,
   loading: false,
   user: null,
+  currentUser: null,
 };
 
 export const usersSlice = createSlice({
@@ -27,7 +27,7 @@ export const usersSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loginUser.fulfilled, (state) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
       })
       .addCase(getOneUser.fulfilled, (state, action) => {
@@ -47,6 +47,13 @@ export const usersSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(getCurrentUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload!;
+        state.loading = false;
       });
   },
 });

@@ -10,6 +10,7 @@ export type StatesType = {
   user?: null | ProfileType;
   videos?: VideoType[];
   video?:null | VideoType;
+  currentUser?:null | ProfileType;
 };
 
 export type RegisterValues = {
@@ -29,7 +30,7 @@ export interface ProfileType {
   first_name: string;
   last_name: string;
   profile_picture: string | File;
-  subs_count?: string;
+  subs_count?: string | number;
 }
 
 
