@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { $axios } from "../../helpers/axios";
-import { setError, usersSlice } from "./User.slice";
+import { setError } from "./User.slice";
 import { LoginValues, ProfileType, RegisterValues } from "../../helpers/types";
 import axios from "axios";
 
@@ -27,6 +27,7 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
 export const loginUser = createAsyncThunk(
   "users/loginUser",
   async (
@@ -62,34 +63,32 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-
 export const getCurrentUser = createAsyncThunk(
   "users/getCurrentUser",
   async (email: string) => {
     try {
       const { data } = await $axios.get<ProfileType>(`/accounts/${email}`);
       console.log(data.id);
-      localStorage.setItem('currentUser', data.id+'')
-    } catch (error) {
-      console.log(error);
-  }
-}
-);
-
-export const getOneUser = createAsyncThunk(
-  "users/getCurrentUser",
-  async (id: string) => {
-    try {
-      const { data } = await $axios.get<ProfileType>(`/accounts/${id}/`);
-      console.log(data);
-      
+      localStorage.setItem('currentUser', data.id+'');
+      localStorage.setItem('emailUser', JSON.stringify(data.email));
       return data
     } catch (error) {
       console.log(error);
+    }
   }
-}
 );
 
+export const getOneUser = createAsyncThunk(
+  "users/getOneUser",
+  async (id: string) => {
+    try {
+      const { data } = await $axios.get<ProfileType>(`/accounts/${id}/`);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const editOneUser = createAsyncThunk(
   "users/editOneUser",
@@ -103,4 +102,3 @@ export const editOneUser = createAsyncThunk(
     }
   }
 );
-

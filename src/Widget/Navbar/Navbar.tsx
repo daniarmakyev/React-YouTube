@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../helpers/types";
-import { getOneUser } from "../../Store/Users/User.action";
+import { getCurrentUser} from "../../Store/Users/User.action";
 import { logout } from "../../Store/Users/User.slice";
 
 const Navbar = () => {
@@ -10,20 +10,34 @@ const Navbar = () => {
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-  const id = localStorage.getItem("currentUser");
-  const navigate = useNavigate()
+
+  const email = localStorage.getItem("emailUser");
+  const cleanedEmail = email ? email.replace(/^"|"$/g, '') : null;
+
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.users);
+  const { currentUser } = useAppSelector((state) => state.users);
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string>('');
 
   useEffect(() => {
-    if (id) {
-      setTimeout(() => {
-        dispatch(getOneUser(id));
-      }, 1000);
+    if (cleanedEmail) {
+      dispatch(getCurrentUser(cleanedEmail));
+      console.log(cleanedEmail);
     }
-  }, [dispatch, id]);
-  
+  }, [dispatch, cleanedEmail]);
 
+  console.log(profilePictureUrl);
+
+  useEffect(() => {
+    if (currentUser?.profile_picture) {
+      const baseUrl = "http://34.16.210.117"; 
+      if (typeof currentUser.profile_picture === 'string') {
+        setProfilePictureUrl(`${baseUrl}${currentUser.profile_picture}`);
+      } else if (currentUser.profile_picture instanceof File) {
+        setProfilePictureUrl(URL.createObjectURL(currentUser.profile_picture));
+      }
+    }
+  }, [currentUser]);
 
 
   return (
@@ -87,7 +101,7 @@ const Navbar = () => {
         </button>
       </section>
 
-      {id && <Link to={"/addVideo"}>
+      {email && <Link to={"/addVideo"}>
         <svg
           className={`addVideo`}
           xmlns="http://www.w3.org/2000/svg"
@@ -101,18 +115,14 @@ const Navbar = () => {
         </svg>
       </Link>}
 
-      {id ? (
+      {email ? (
         <Link to={"/profile"}>
-          {user?.profile_picture ? (
-            typeof user.profile_picture === "string" ? (
-              <img src={user.profile_picture} className="avatar" alt="avatar" />
-            ) : (
-              <img
-                src={URL.createObjectURL(user.profile_picture)}
-                className="avatar"
-                alt="avatar"
-              />
-            )
+          {currentUser?.profile_picture ? (
+           <img
+           className={`avatar`}
+           src={profilePictureUrl || "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png"}
+           alt="avatar"
+         />
           ) : (
             <img
               className="avatar"
@@ -143,7 +153,7 @@ const Navbar = () => {
         </Link>
       )}
 
-      {id && (
+      {email && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="26"
