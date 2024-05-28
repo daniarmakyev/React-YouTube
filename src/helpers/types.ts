@@ -41,7 +41,7 @@ export interface VideoType {
   likes_count?: string;
   title?: string;
   description?: string;
-  file?: string ;
+  file?: string | File;
   thumbnail?: string | File;
   uploaded_at?: string | Date;
   owner?: number;

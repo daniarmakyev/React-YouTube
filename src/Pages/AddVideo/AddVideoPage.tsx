@@ -13,7 +13,7 @@ const AddVideoPage = () => {
     description: '',
     file: '',  
     thumbnail: '',
-    owner: parseInt(id + ''),
+    owner: parseInt(id + '', 10),
   });
 
   const dispatch = useAppDispatch();
@@ -28,37 +28,43 @@ const AddVideoPage = () => {
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value, files } = e.target;
-    if (name === "thumbnail" && files && files[0]) {
+    if (files && files.length > 0) {
       setUser({ ...users, [name]: files[0] });
     } else {
       setUser({ ...users, [name]: value });
     }
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (id) {
       const formData = new FormData();
       formData.append("title", users.title!);
       formData.append("description", users.description!);
       formData.append("owner", id);
-      formData.append("file", users.file!); 
+      if (users.file instanceof File) {
+        formData.append("file", users.file);
+      }
       if (users.thumbnail instanceof File) {
         formData.append("thumbnail", users.thumbnail);
       }
-
       formData.forEach((value, key) => {
         console.log(key, value);
       });
 
-      dispatch(postVideos({ newData: formData }));
-      navigate('/');
+      try {
+        await dispatch(postVideos({ newData: formData }));
+        console.log('Видео успешно загружено');
+        navigate('/');
+      } catch (error) {
+        console.error("Ошибка при загрузке видео:", error);
+      }
     }
   }
 
   return (
     <div className="mainContent">
-      <form onSubmit={handleSubmit} className={styles.editFrom} encType="multipart/form-data">
+      <form onSubmit={handleSubmit} className={styles.editForm} encType="multipart/form-data">
         <h2>Добавление</h2>
         <Input
           onChange={handleChange}
@@ -71,9 +77,10 @@ const AddVideoPage = () => {
           placeholder="Description"
         />
         <Input
+          accept="video/*"
           onChange={handleChange}
           name="file"
-          type="text"
+          type="file"
           placeholder="Video link"
         />
         <Input
@@ -83,7 +90,7 @@ const AddVideoPage = () => {
           type="file"
           placeholder="Thumbnail"
         />
-        <button>Добавить видео</button>
+        <button type="submit">Добавить видео</button>
       </form>
     </div>
   );
