@@ -49,12 +49,6 @@ const DetailView = () => {
         uploaded_at: video.uploaded_at || '',
         file: video.file || '',
       });
-
-      if (video.file) {
-        const cleaned = video.file.replace(/"/g, '');
-        setCleanedHTML(cleaned);
-      }
-
       setLoading(false);
     }
   }, [video]);
@@ -71,9 +65,10 @@ const DetailView = () => {
 
   return (
     <div className={`mainContent ${styles.mainContent}`}>
-      {cleanedHTML && <div className={styles.video} dangerouslySetInnerHTML={{ __html: cleanedHTML }}></div>}
+      
       <section>
         <h3 className={styles.title}>{videos.title}</h3>
+        <video src={videos.file && ''}></video>
         <section className={styles.userSection}>
           {userr.profile_picture ? (
             typeof userr.profile_picture === 'string' ? (

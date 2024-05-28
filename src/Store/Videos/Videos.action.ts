@@ -7,8 +7,8 @@ export const getVideos = createAsyncThunk(
     "videos/getVideos",
     async () => {
       try {
-        const { data } = await $axios.get<VideoType>(`/videos/`);
-        return data.results
+        const { data } = await $axios.get<VideoType>(`/videos/`);        
+        return data
       } catch (error) {
         console.log(error);
     }
