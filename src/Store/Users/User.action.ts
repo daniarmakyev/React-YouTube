@@ -68,7 +68,6 @@ export const getCurrentUser = createAsyncThunk(
   async (email: string) => {
     try {
       const { data } = await $axios.get<ProfileType>(`/accounts/${email}`);
-      console.log(data.id);
       localStorage.setItem('currentUser', data.id+'');
       localStorage.setItem('emailUser', JSON.stringify(data.email));
       return data

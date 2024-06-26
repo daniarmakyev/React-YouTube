@@ -2,6 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { VideoType } from "../../helpers/types";
 import axios from "axios";
 import { $axios } from "../../helpers/axios";
+import { useEffect } from "react";
+
 
 export const getVideos = createAsyncThunk(
     "videos/getVideos",
@@ -23,10 +25,20 @@ export const getVideos = createAsyncThunk(
       } catch (error) {
         console.log(error);
     }
-  }
-  );
+  })
+
+  // export const DELETEVIDEO = createAsyncThunk(
+  //   "videos/DELETEVIDEO",
+  //   async ( id: number ) => {
+  //     try {
+  //       await $axios.delete<VideoType>(`/videos/${id}/`);
+  //     } catch (error) {
+  //       console.log(error);
+  //   }
+  // }
+
   export const getVideoById = createAsyncThunk(
-    "users/getCurrentUser",
+    "users/getVideoById",
     async (id: string) => {
       try {
         const { data } = await $axios.get<VideoType>(`/videos/${id}/`);

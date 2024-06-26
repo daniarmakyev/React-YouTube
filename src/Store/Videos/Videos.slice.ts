@@ -21,7 +21,7 @@ export const videosSlice = createSlice({
       .addCase(getVideos.fulfilled, (state, { payload }) => {
         state.videos = Array.isArray(payload) ? payload : [];
         state.loading = false;
-      })      .addCase(getVideoById.pending, (state) => {
+      }).addCase(getVideoById.pending, (state) => {
         state.loading = true;
       })
       .addCase(getVideoById.fulfilled, (state, action) => {
