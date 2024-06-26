@@ -1,0 +1,13 @@
+.editForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px;
+    margin: auto;
+
+}
+.editForm input {
+    max-width: 300px;
+    width: 100%;
+}
