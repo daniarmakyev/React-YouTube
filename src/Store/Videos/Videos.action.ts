@@ -49,3 +49,23 @@ export const getVideos = createAsyncThunk(
     }
   }
   );
+
+  export const postLikes = createAsyncThunk(
+    "videos/postLikes",
+    async (id:string) => {
+      try {
+        await $axios.post<VideoType>(`/like/${id}/`);
+      } catch (error) {
+        console.log(error);
+    }
+  })
+
+  export const subScribe = createAsyncThunk(
+    "videos/subScribe",
+    async (id:string) => {
+      try {
+        await $axios.post<VideoType>(`/subscribe/${id}/`);
+      } catch (error) {
+        console.log(error);
+    }
+  })
