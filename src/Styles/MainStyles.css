@@ -40,4 +40,5 @@ body, html {
     grid-area: mainContent;
     margin-left: 20px;
     max-width: 1720px;
+    width: 90%;
   }

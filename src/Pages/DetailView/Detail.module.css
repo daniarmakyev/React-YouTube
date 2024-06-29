@@ -25,6 +25,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     max-width: 90%;
+    width: 100%;
 }
 
 .userSection h3 {
@@ -65,4 +66,10 @@
     align-items: center;
     border-radius: 15px;
     padding-right: 10px;
+}
+
+.loader {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
