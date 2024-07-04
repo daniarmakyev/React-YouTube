@@ -52,9 +52,10 @@ export const getVideos = createAsyncThunk(
 
   export const postLikes = createAsyncThunk(
     "videos/postLikes",
-    async (id:string) => {
+    async (id: string, thunkAPI) => {
       try {
         await $axios.post<VideoType>(`/like/${id}/`);
+        thunkAPI.dispatch(getVideoById(id));
       } catch (error) {
         console.log(error);
     }
