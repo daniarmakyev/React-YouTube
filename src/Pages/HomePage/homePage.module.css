@@ -1,7 +1,7 @@
 .mainContent {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 19px;
     margin-left: auto !important;
     margin-right: auto;
 }
