@@ -36,12 +36,10 @@ const DetailView = () => {
 
   const fileUrl = useMemo(() => {
     if (!video) {
-      // console.log("Video object is undefined");
       return undefined;
     }
 
     if (typeof video.file === "string") {
-      // console.log("Video file is a string:", video.file);
       return video.file;
     }
 
