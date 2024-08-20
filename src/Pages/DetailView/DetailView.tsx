@@ -45,7 +45,6 @@ const DetailView = () => {
 
     if (video.file && video.file instanceof File) {
       const url = URL.createObjectURL(video.file);
-      // console.log("Video file is a File:", url);
       return url;
     }
     return undefined;
