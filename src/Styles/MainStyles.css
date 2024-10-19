@@ -20,7 +20,6 @@ body, html {
       "sidebar mainContent";
   }
   
-  
   .header {
     grid-area: header;
     display: flex;
